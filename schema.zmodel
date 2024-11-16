@@ -1,0 +1,58 @@
+// This is a sample model to get you started.
+
+/// A sample data source using local sqlite db.
+datasource db {
+    provider = 'postgresql'
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+plugin hooks {
+    provider = '@zenstackhq/tanstack-query'
+    output = "./hooks"
+    target = "react"
+    portable=true
+}
+
+/// User model
+model User {
+    id       String @id @default(cuid())
+    email    String @unique @email @length(6, 32)
+    password String @password @omit
+    posts    Post[]
+
+    // everybody can signup
+    @@allow('create', true)
+
+    // full access by self
+    @@allow('all', auth() == this)
+}
+
+enum Food {
+    Banana
+    Apple
+    Orange
+}
+
+/// Post model
+model Post {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    title     String   @length(1, 256)
+    content   String
+    published Boolean  @default(false)
+    author    User     @relation(fields: [authorId], references: [id])
+    authorId  String
+
+    food Food @default(Apple)
+
+    // allow read for all signin users
+    @@allow('read', auth() != null && published)
+
+    // full access by author
+    @@allow('all', author == auth())
+}

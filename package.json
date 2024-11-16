@@ -1,0 +1,23 @@
+{
+  "name": "portable",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@prisma/client": "^5.21.x",
+    "@tanstack/react-query": "^5.60.5",
+    "@zenstackhq/tanstack-query": "^2.7.5",
+    "prisma": "^5.21.1",
+    "typescript": "^5.6.3",
+    "zenstack": "^2.9.0"
+  },
+  "dependencies": {
+    "@zenstackhq/runtime": "^2.7.5"
+  }
+}
