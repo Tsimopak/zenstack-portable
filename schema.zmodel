@@ -48,7 +48,7 @@ model Post {
     author    User     @relation(fields: [authorId], references: [id])
     authorId  String
 
-    food Food @default(Apple)
+    // food Food @default(Apple)
 
     // allow read for all signin users
     @@allow('read', auth() != null && published)
