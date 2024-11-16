@@ -2,8 +2,8 @@
 
 /// A sample data source using local sqlite db.
 datasource db {
-    provider = 'postgresql'
-    url      = env("DATABASE_URL")
+    provider = 'sqlite'
+    url = 'file:./dev.db'
 }
 
 generator client {
@@ -31,11 +31,11 @@ model User {
     @@allow('all', auth() == this)
 }
 
-enum Food {
-    Banana
-    Apple
-    Orange
-}
+// enum Food {
+//     Banana
+//     Apple
+//     Orange
+// }
 
 /// Post model
 model Post {
